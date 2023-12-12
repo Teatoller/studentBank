@@ -3,6 +3,8 @@ package studentbank.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import studentbank.exception.StudentAlreadyExistException;
+import studentbank.exception.StudentNotFoundException;
+import studentbank.exception.StudentNotFoundException;
 import studentbank.model.Student;
 import studentbank.repository.StudentRepository;
 
@@ -31,7 +33,13 @@ public class StudentService implements IStudentService{
 
     @Override
     public Student updateStudent(Student student, Long id) {
-        return null;
+        return studentRepository.findById(id).map(selectStudent ->{
+            selectStudent.setFirstName(student.getFirstName());
+            selectStudent.setLastName(student.getLastName());
+            selectStudent.setEmail(student.getEmail());
+            selectStudent.setDepartment(student.getDepartment());
+            return studentRepository.save(selectStudent);
+        }).orElseThrow(()-> new StudentNotFoundException("Sorry, this student could not be found"));
     }
 
     @Override
