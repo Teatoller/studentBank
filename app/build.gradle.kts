@@ -43,7 +43,7 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass.set("studentbank.App")
+    mainClass.set("studentbank.StudentBank")
 }
 
 tasks.named<Test>("test") {
