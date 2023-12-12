@@ -20,6 +20,11 @@ public class StudentController {
         return new ResponseEntity<>(studentService.getStudents(), HttpStatus.FOUND);
     }
 
+    @GetMapping("/student/{id}")
+    public Student getStudentById(@PathVariable Long id){
+        return studentService.getStudentById(id);
+    }
+
     @PostMapping
     public Student addStudent(@RequestBody Student student){
         return studentService.addStudent(student);
