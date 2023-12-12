@@ -3,9 +3,7 @@ package studentbank.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import studentbank.model.Student;
 import studentbank.service.IStudentService;
 
@@ -21,4 +19,10 @@ public class StudentController {
     public ResponseEntity<List<Student>> getStudents(){
         return new ResponseEntity<>(studentService.getStudents(), HttpStatus.FOUND);
     }
+
+    @PostMapping
+    public Student addStudent(@RequestBody Student student){
+        return studentService.addStudent(student);
+    }
+
 }
